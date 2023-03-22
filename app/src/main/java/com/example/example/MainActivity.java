@@ -1,7 +1,10 @@
 package com.example.example;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
@@ -13,21 +16,32 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.load.resource.gif.GifDrawable;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
+import com.example.example.api.RetrofitApiService;
+import com.example.example.model.example1.Post;
+import com.example.example.retrofit.RetrofitApiManager;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
+    private Button btnGithub;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        context = this;
+        btnGithub = findViewById(R.id.btn_github_retrofit);
+        btnGithub.setOnClickListener(view -> {
+            Intent intent = new Intent(context, GitActivity.class);
+            startActivity(intent);
+            finish();
+
+        });
 
         ImageView gifView = findViewById(R.id.iv_gif);
 
@@ -58,12 +72,7 @@ public class MainActivity extends AppCompatActivity {
         /**
          * Retrofit 객체 생성
          */
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(RetrofitApiService.BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RetrofitApiService retrofitApiService = retrofit.create(RetrofitApiService.class);
+        RetrofitApiService retrofitApiService = RetrofitApiManager.Build().create(RetrofitApiService.class);
         retrofitApiService.getData("1").enqueue(new Callback<List<Post>>() {
             @Override
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
