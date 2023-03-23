@@ -4,11 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.example.R;
 import com.example.example.model.githubmodel.Repo;
 
@@ -46,9 +48,11 @@ public class GithubRepoAdapter extends RecyclerView.Adapter<GithubRepoAdapter.Vi
 
         String name = item.getName();
         String desc = item.getDescription();
+        String profileUrl = item.getProfileUrl();
 
         holder.tvName.setText(name);
         holder.tvDesc.setText(desc);
+        Glide.with(context).load(profileUrl).into(holder.ivProfile);
 
     }
 
@@ -66,6 +70,8 @@ public class GithubRepoAdapter extends RecyclerView.Adapter<GithubRepoAdapter.Vi
         TextView tvName;
         @BindView(R.id.tv_description)
         TextView tvDesc;
+        @BindView(R.id.iv_profile)
+        ImageView ivProfile;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

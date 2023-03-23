@@ -4,12 +4,10 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -81,8 +79,6 @@ public class GitActivity extends AppCompatActivity {
         pbLoading.setVisibility(View.VISIBLE);
         repoList = new ArrayList<>();
 
-        Log.e("test", " getGithubData(username) : " + mGithubApiService.getGithubData(username).toList().toString());
-
         mGithubApiService.getGithubData(username)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -94,12 +90,19 @@ public class GitActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(List<GithubResponse> githubResponses) {
+
                         for (int i = 0; i < githubResponses.size(); i++) {
                             String name = githubResponses.get(i).getFullName();
                             String description = githubResponses.get(i).getDescription();
-                            repoList.add(new Repo(name, description));
+                            String url = githubResponses.get(i).getOwner().getAvatarUrl();
+                            if (description == null) {
+                                description = getString(R.string.description_is_null);
+                            }
+
+                            repoList.add(new Repo(name, description, url));
 
                         }
+
                     }
 
                     @Override
@@ -113,11 +116,17 @@ public class GitActivity extends AppCompatActivity {
                     @Override
                     public void onComplete() {
                         pbLoading.setVisibility(View.GONE);
-                        AppUtil.showToast(context, "데이터를 성공적으로 가져왔습니다!");
                         Log.e("test", "repoList : " + repoList.toString());
-                        mGithubRepoAdapter = new GithubRepoAdapter(context, repoList, null);
-                        recyclerView.setAdapter(mGithubRepoAdapter);
-                        mGithubRepoAdapter.notifyDataSetChanged();
+
+                        if (repoList != null && !repoList.isEmpty()) {
+                            AppUtil.showToast(context, "데이터를 성공적으로 가져왔습니다!");
+                            mGithubRepoAdapter = new GithubRepoAdapter(context, repoList, null);
+                            recyclerView.setAdapter(mGithubRepoAdapter);
+                            mGithubRepoAdapter.notifyDataSetChanged();
+                        } else {
+                            AppUtil.showToast(context, "찾으시는 데이터가 없습니다.");
+                        }
+
                     }
                 });
     }
