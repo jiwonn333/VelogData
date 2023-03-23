@@ -87,7 +87,6 @@ public class GitActivity extends AppCompatActivity {
                     public void onSubscribe(Disposable d) {
                         Log.e("test", " d: " + d.toString());
                     }
-
                     @Override
                     public void onNext(List<GithubResponse> githubResponses) {
 
