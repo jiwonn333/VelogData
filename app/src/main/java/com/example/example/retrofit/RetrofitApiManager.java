@@ -24,11 +24,7 @@ public class RetrofitApiManager {
         return instance;
     }
 
-    public static Retrofit GithubBuild() {
-        Gson gson = new GsonBuilder()
-                .setLenient()
-                .create();
-
+    public static OkHttpClient createOkHttpClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient client = new OkHttpClient
@@ -38,12 +34,28 @@ public class RetrofitApiManager {
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .build();
 
+        return client;
+    }
+    public static Retrofit GithubBuild() {
+        Gson gson = new GsonBuilder()
+                .setLenient()
+                .create();
+//
+//        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
+//        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+//        OkHttpClient client = new OkHttpClient
+//                .Builder()
+//                .addInterceptor(interceptor)
+//                .readTimeout(10, TimeUnit.SECONDS)
+//                .connectTimeout(30, TimeUnit.SECONDS)
+//                .build();
+
         if (retrofit == null) {
             retrofit = new Retrofit.Builder()
                     .baseUrl(Constant.GITHUB_URL)
                     .addConverterFactory(GsonConverterFactory.create(gson))
                     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .client(client)
+                    .client(createOkHttpClient())
                     .build();
         }
         return retrofit;

@@ -21,15 +21,20 @@ import com.example.example.recyclerview.GithubRepoAdapter;
 import com.example.example.retrofit.RetrofitApiManager;
 import com.example.example.util.AppUtil;
 
+import java.io.IOError;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observer;
+import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.http.HTTP;
 
 public class GitActivity extends AppCompatActivity {
     @BindView(R.id.pb_loading)
@@ -75,21 +80,21 @@ public class GitActivity extends AppCompatActivity {
     }
 
     private void requestRepos(String username) {
-        Log.e("test", "username : " + username);
         pbLoading.setVisibility(View.VISIBLE);
+        recyclerView.setVisibility(View.GONE);
         repoList = new ArrayList<>();
 
         mGithubApiService.getGithubData(username)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<GithubResponse>>() {
+                .subscribe(new SingleObserver<List<GithubResponse>>() {
                     @Override
                     public void onSubscribe(Disposable d) {
-                        Log.e("test", " d: " + d.toString());
-                    }
-                    @Override
-                    public void onNext(List<GithubResponse> githubResponses) {
 
+                    }
+
+                    @Override
+                    public void onSuccess(List<GithubResponse> githubResponses) {
                         for (int i = 0; i < githubResponses.size(); i++) {
                             String name = githubResponses.get(i).getFullName();
                             String description = githubResponses.get(i).getDescription();
@@ -97,25 +102,14 @@ public class GitActivity extends AppCompatActivity {
                             if (description == null) {
                                 description = getString(R.string.description_is_null);
                             }
-
-                            repoList.add(new Repo(name, description, url));
+                            if (url == null) {
+                                url = String.valueOf(R.drawable.baseline_android_24);
+                            }
+                                repoList.add(new Repo(name, description, url));
 
                         }
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        AppUtil.showToast(context, e.getMessage());
-                        Log.e("test", e.getMessage());
-                        e.printStackTrace();
-                    }
-
-                    @SuppressLint("NotifyDataSetChanged")
-                    @Override
-                    public void onComplete() {
                         pbLoading.setVisibility(View.GONE);
-                        Log.e("test", "repoList : " + repoList.toString());
+                        recyclerView.setVisibility(View.VISIBLE);
 
                         if (repoList != null && !repoList.isEmpty()) {
                             AppUtil.showToast(context, "데이터를 성공적으로 가져왔습니다!");
@@ -123,11 +117,82 @@ public class GitActivity extends AppCompatActivity {
                             recyclerView.setAdapter(mGithubRepoAdapter);
                             mGithubRepoAdapter.notifyDataSetChanged();
                         } else {
+                            recyclerView.setVisibility(View.GONE);
                             AppUtil.showToast(context, "찾으시는 데이터가 없습니다.");
                         }
 
                     }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        pbLoading.setVisibility(View.GONE);
+                        recyclerView.setVisibility(View.GONE);
+                        AppUtil.showToast(context, "찾으시는 데이터가 없습니다.");
+                        Log.e("test", e.getMessage());
+                        e.printStackTrace();
+
+                        if (Objects.equals(e.getCause(), IOError.class) || e.getCause() == null) {
+                            AppUtil.showToast(context, "데이터 찾기 실패.");
+                        }
+                   }
                 });
+
+
+
+//        mGithubApiService.getGithubData(username)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Observer<List<GithubResponse>>() {
+//                    @Override
+//                    public void onSubscribe(Disposable d) {
+//                    }
+//
+//                    @Override
+//                    public void onNext(List<GithubResponse> githubResponses) {
+//
+//                        for (int i = 0; i < githubResponses.size(); i++) {
+//                            String name = githubResponses.get(i).getFullName();
+//                            String description = githubResponses.get(i).getDescription();
+//                            String url = githubResponses.get(i).getOwner().getAvatarUrl();
+//                            if (description == null) {
+//                                description = getString(R.string.description_is_null);
+//                            }
+//                            if (url == null) {
+//                                url = String.valueOf(R.drawable.baseline_android_24);
+//
+//                                repoList.add(new Repo(name, description, url));
+//
+//                        }
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        pbLoading.setVisibility(View.GONE);
+//                        recyclerView.setVisibility(View.GONE);
+//                        AppUtil.showToast(context, "찾으시는 데이터가 없습니다.");
+//                        Log.e("test", e.getMessage());
+//                        e.printStackTrace();
+//                    }
+//
+//                    @SuppressLint("NotifyDataSetChanged")
+//                    @Override
+//                    public void onComplete() {
+//                        pbLoading.setVisibility(View.GONE);
+//                        recyclerView.setVisibility(View.VISIBLE);
+//
+//                        if (repoList != null && !repoList.isEmpty()) {
+//                            AppUtil.showToast(context, "데이터를 성공적으로 가져왔습니다!");
+//                            mGithubRepoAdapter = new GithubRepoAdapter(context, repoList, null);
+//                            recyclerView.setAdapter(mGithubRepoAdapter);
+//                            mGithubRepoAdapter.notifyDataSetChanged();
+//                        } else {
+//                            recyclerView.setVisibility(View.GONE);
+//                            AppUtil.showToast(context, "찾으시는 데이터가 없습니다.");
+//                        }
+//
+//                    }
+//                });
     }
 
 
