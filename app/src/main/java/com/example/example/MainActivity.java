@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -29,8 +28,6 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btnGithub;
-    private Button btnRoomDB;
     private Context context;
 
     @SuppressLint("MissingInflatedId")
@@ -39,19 +36,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this;
-        btnGithub = findViewById(R.id.btn_github_retrofit);
+        Button btnGithub = findViewById(R.id.btn_github_retrofit);
         btnGithub.setOnClickListener(view -> {
             Intent intent = new Intent(context, GitActivity.class);
             startActivity(intent);
-            finish();
-
         });
 
-        btnRoomDB = findViewById(R.id.btn_room_db);
+        Button btnRoomDB = findViewById(R.id.btn_room_db);
         btnRoomDB.setOnClickListener(view -> {
             Intent intent = new Intent(context, RoomDatabaseActivity.class);
             startActivity(intent);
-            finish();
         });
         ImageView gifView = findViewById(R.id.iv_gif);
 
