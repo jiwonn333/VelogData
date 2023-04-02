@@ -5,7 +5,8 @@ plugins {
     // 코틀린 혼용을 위한 추가
     id 'kotlin-android'
     id 'kotlin-parcelize'
-    id 'kotlin-kapt'
+//    id 'kotlin-kap
+
 }
 
 
@@ -71,11 +72,14 @@ dependencies {
 
     implementation 'com.jakewharton:butterknife:10.2.3'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.2.3'
+//    kapt 'com.jakewharton:butterknife-compiler:10.2.3'
+
+
 
     // Room
     //noinspection GradleDependency
     implementation "androidx.room:room-runtime:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
 
     // liveData
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
