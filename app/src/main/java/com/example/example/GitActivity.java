@@ -1,6 +1,5 @@
 package com.example.example;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -22,19 +21,16 @@ import com.example.example.retrofit.RetrofitApiManager;
 import com.example.example.util.AppUtil;
 
 import java.io.IOError;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.http.HTTP;
 
 public class GitActivity extends AppCompatActivity {
     @BindView(R.id.pb_loading)
@@ -105,7 +101,7 @@ public class GitActivity extends AppCompatActivity {
                             if (url == null) {
                                 url = String.valueOf(R.drawable.baseline_android_24);
                             }
-                                repoList.add(new Repo(name, description, url));
+                            repoList.add(new Repo(name, description, url));
 
                         }
                         pbLoading.setVisibility(View.GONE);
@@ -134,9 +130,8 @@ public class GitActivity extends AppCompatActivity {
                         if (Objects.equals(e.getCause(), IOError.class) || e.getCause() == null) {
                             AppUtil.showToast(context, "데이터 찾기 실패.");
                         }
-                   }
+                    }
                 });
-
 
 
 //        mGithubApiService.getGithubData(username)

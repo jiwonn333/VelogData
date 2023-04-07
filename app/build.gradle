@@ -5,8 +5,7 @@ plugins {
     // 코틀린 혼용을 위한 추가
     id 'kotlin-android'
     id 'kotlin-parcelize'
-//    id 'kotlin-kap
-
+    id 'kotlin-kapt'
 }
 
 
@@ -79,7 +78,7 @@ dependencies {
     // Room
     //noinspection GradleDependency
     implementation "androidx.room:room-runtime:$room_version"
-    annotationProcessor "androidx.room:room-compiler:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
     // liveData
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.4.0'
