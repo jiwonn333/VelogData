@@ -2,20 +2,21 @@ package com.example.example.rxjava;
 
 import org.junit.Test;
 
+import java.util.stream.IntStream;
+
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 
-public class FirstExample {
-    private FirstExample demo;
+public class RxJavaExample {
+    private RxJavaExample demo;
 
     @Test
     public void main() {
-        demo = new FirstExample();
+        demo = new RxJavaExample();
 
-//        demo.emit_1();
-        demo.emit_2();
+        demo.emit_3();
+
 
 
     }
@@ -81,6 +82,38 @@ public class FirstExample {
         source2.subscribe(source2Result -> System.out.println("source2Result : " + source2Result));
 
     }
+
+
+    public void emit_3() {
+        /**
+         * 복수 데이터 사용 함수
+         */
+
+        // fromArray()
+        Integer[] arr = {100,200,300};
+        Observable<Integer> source = Observable.fromArray(arr);
+
+        source.subscribe(System.out::println);
+        /**
+         * print-> 100
+         *         200
+         *         300
+         */
+
+        // int 배열 처리시
+        int[] intArray = {1,2,3};
+        Observable.fromArray(intArray).subscribe(System.out::println);
+        /**
+         * print-> [I@5c86dbc5
+         */
+
+        // 1. Stream API 사용 방법
+        Observable.fromArray(IntStream.of(intArray).boxed().toArray(Integer[]::new)).subscribe(System.out::println);
+
+    }
+
+
+
 
 
 }
