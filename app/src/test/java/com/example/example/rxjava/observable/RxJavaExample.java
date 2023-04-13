@@ -1,12 +1,25 @@
-package com.example.example.rxjava;
+package com.example.example.rxjava.observable;
+
+import com.example.example.rxjava.common.Order;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.stream.IntStream;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.functions.Consumer;
+import io.reactivex.internal.functions.ObjectHelper;
+import io.reactivex.internal.operators.observable.ObservableFromIterable;
+import io.reactivex.plugins.RxJavaPlugins;
 
 public class RxJavaExample {
     private RxJavaExample demo;
@@ -16,7 +29,6 @@ public class RxJavaExample {
         demo = new RxJavaExample();
 
         demo.emit_3();
-
 
 
     }
@@ -90,7 +102,7 @@ public class RxJavaExample {
          */
 
         // fromArray()
-        Integer[] arr = {100,200,300};
+        Integer[] arr = {100, 200, 300};
         Observable<Integer> source = Observable.fromArray(arr);
 
         source.subscribe(System.out::println);
@@ -101,7 +113,7 @@ public class RxJavaExample {
          */
 
         // int 배열 처리시
-        int[] intArray = {1,2,3};
+        int[] intArray = {1, 2, 3};
         Observable.fromArray(intArray).subscribe(System.out::println);
         /**
          * print-> [I@5c86dbc5
@@ -110,10 +122,44 @@ public class RxJavaExample {
         // 1. Stream API 사용 방법
         Observable.fromArray(IntStream.of(intArray).boxed().toArray(Integer[]::new)).subscribe(System.out::println);
 
+
+        /**
+         * Iterable<E> 인터페이스를 구현하는 대표적인 클래스 중
+         * List, Set, BlockingQueue 인터페이스 객체의 Observable 생성 방법에 대해 다룰 예정.
+         */
+        // 1. fromIterable()에 List 사용
+        List<String> names = new ArrayList<>();
+        names.add("jiwon");
+        names.add("shin");
+
+        Observable<String> nameSource = Observable.fromIterable(names);
+        startPrint(nameSource);
+
+        // 2. fromIterable()에 Set 사용
+        Set<String> cities = new HashSet<>();
+        cities.add("서울");
+        cities.add("송파구");
+
+        Observable<String> citySource = Observable.fromIterable(cities);
+        startPrint(citySource);
+
+
+        // 3. fromIterable()에 BlockingQueue 사용
+        BlockingQueue<Order> orderQueue = new ArrayBlockingQueue<>(100);
+        orderQueue.add(new Order("ord-1"));
+        orderQueue.add(new Order("ord-2"));
+        orderQueue.add(new Order("ord-3"));
+
+        Observable<Order> orderSource = Observable.fromIterable(orderQueue);
+        startPrint(orderSource);
+
+
     }
 
 
-
+    public void startPrint(Observable source) {
+        source.subscribe(System.out::println);
+    }
 
 
 }
