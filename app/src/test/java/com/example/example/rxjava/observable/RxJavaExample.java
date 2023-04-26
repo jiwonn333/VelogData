@@ -3,6 +3,8 @@ package com.example.example.rxjava.observable;
 import com.example.example.rxjava.common.Order;
 
 import org.junit.Test;
+import org.reactivestreams.Publisher;
+import org.reactivestreams.Subscriber;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -167,6 +169,16 @@ public class RxJavaExample {
 
         Observable<String> futureSource = Observable.fromFuture(future);
         startPrint(futureSource);
+
+
+        // fromPublisher() 함수 활용
+        Publisher<String> publisher = s -> {
+            s.onNext("Observable.formPublisher");
+            s.onComplete();
+        };
+        Observable<String> publisherSource = Observable.fromPublisher(publisher);
+        startPrint(publisherSource);
+
     }
 
 
