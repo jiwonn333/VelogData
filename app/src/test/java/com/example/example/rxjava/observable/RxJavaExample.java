@@ -5,33 +5,21 @@ import com.example.example.rxjava.common.Order;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.IntStream;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.functions.Consumer;
-import io.reactivex.internal.functions.ObjectHelper;
-import io.reactivex.internal.operators.observable.ObservableFromIterable;
-import io.reactivex.plugins.RxJavaPlugins;
 
 public class RxJavaExample {
-    private RxJavaExample demo;
-
-    @Test
-    public void main() {
-        demo = new RxJavaExample();
-
-        demo.emit_3();
-
-
-    }
 
     public void emit_1() {
         Observable.just("Hello", "RxJava!")
@@ -95,10 +83,10 @@ public class RxJavaExample {
 
     }
 
-
+    @Test
     public void emit_3() {
         /**
-         * 복수 데이터 사용 함수
+         * 복수 데이터 사용 함수ㅅ
          */
 
         // fromArray()
@@ -154,6 +142,17 @@ public class RxJavaExample {
         startPrint(orderSource);
 
 
+        /**
+         * Callable 객체와 fromCallable() 함수를 이용해 Observable 생성
+         */
+
+        // 람다 표현식 활용한 fromCallable()
+        Callable<String> callable = () -> {
+            Thread.sleep(1000);
+            return "Hello Callable";
+        };
+        Observable<String> callableSource = Observable.fromCallable(callable);
+        startPrint(callableSource);
     }
 
 
