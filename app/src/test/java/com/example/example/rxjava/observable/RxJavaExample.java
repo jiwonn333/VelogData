@@ -153,6 +153,20 @@ public class RxJavaExample {
         };
         Observable<String> callableSource = Observable.fromCallable(callable);
         startPrint(callableSource);
+
+        /**
+         * 보통 Executor 인터페이스를 구현한 클래스에 Callable 객체를 인자로 넣어
+         * Future 객체 반환
+         */
+
+        // 람다 표현식 활용한  fromFuture()
+        Future<String> future = Executors.newSingleThreadExecutor().submit(() -> {
+            Thread.sleep(1000);
+            return "Hello Future";
+        });
+
+        Observable<String> futureSource = Observable.fromFuture(future);
+        startPrint(futureSource);
     }
 
 
