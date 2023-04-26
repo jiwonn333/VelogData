@@ -4,8 +4,6 @@ import com.example.example.rxjava.common.Order;
 
 import org.junit.Test;
 import org.reactivestreams.Publisher;
-import org.reactivestreams.Subscriber;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,7 +14,6 @@ import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.stream.IntStream;
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.functions.Consumer;
