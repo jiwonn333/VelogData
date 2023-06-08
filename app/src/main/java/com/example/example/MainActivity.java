@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +20,7 @@ import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.example.example.api.RetrofitApiService;
 import com.example.example.model.example1.Post;
+import com.example.example.navigation.BottomNavigationActivity;
 import com.example.example.retrofit.RetrofitApiManager;
 
 import java.util.List;
@@ -36,6 +38,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this;
+
+        TextView tvBottomNavigation = findViewById(R.id.tv_bottom_navigation);
+        tvBottomNavigation.setOnClickListener(v -> {
+            Intent intent = new Intent(context, BottomNavigationActivity.class);
+            startActivity(intent);
+        });
+
         Button btnGithub = findViewById(R.id.btn_github_retrofit);
         btnGithub.setOnClickListener(view -> {
             Intent intent = new Intent(context, GitActivity.class);

@@ -14,7 +14,9 @@
         android:theme="@style/Theme.Example"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-
+        <activity
+            android:name=".navigation.BottomNavigationActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -25,9 +27,11 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GitActivity" android:exported="false" />
+            android:name=".GitActivity"
+            android:exported="false" />
         <activity
-            android:name=".RoomDatabaseActivity" android:exported="false" />
+            android:name=".RoomDatabaseActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

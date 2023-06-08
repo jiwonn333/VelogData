@@ -2,4 +2,7 @@
     <string name="app_name">Example</string>
     <string name="username_github">찾을 아이디를 입력하세요.</string>
     <string name="description_is_null">비어 있음</string>
+    <string name="text_bottom_navigation">BottomNavigationActivity «이동</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
