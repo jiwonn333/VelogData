@@ -26,4 +26,4 @@
 [![Velog's GitHub stats](https://velog-readme-stats.vercel.app/api?name=jiwon3378)](https://velog.io/@jiwon3378/Android-Jetpack-Bottom-Navigation-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0)
 
 ## Ripple Effect 효과 적용하기
-[![Velog's GitHub stats](https://velog.io/@jiwon3378/Android-%EB%B2%84%ED%8A%BC-%ED%81%B4%EB%A6%AD-%ED%9A%A8%EA%B3%BC-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0)
+[![Velog's GitHub stats](https://velog-readme-stats.vercel.app/api?name=jiwon3378)](https://velog.io/@jiwon3378/Android-%EB%B2%84%ED%8A%BC-%ED%81%B4%EB%A6%AD-%ED%9A%A8%EA%B3%BC-%EC%A0%81%EC%9A%A9%ED%95%98%EA%B8%B0)
