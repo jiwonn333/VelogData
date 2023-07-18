@@ -95,7 +95,6 @@ public class MainActivity extends AppCompatActivity {
                         Log.e("test", "isSuccesful~~!!");
                         Log.e("test", userInfo.get(0).getTitle());
                     }
-
                 }
             }
 
