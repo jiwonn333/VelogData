@@ -46,10 +46,16 @@ public class MainActivity extends AppCompatActivity {
         });
 
         Button btnGithub = findViewById(R.id.btn_github_retrofit);
+//        btnGithub.setOnClickListener(view -> {
+//            Intent intent = new Intent(context, TestActivity.class);
+//            startActivity(intent);
+//        });
+
         btnGithub.setOnClickListener(view -> {
             Intent intent = new Intent(context, GitActivity.class);
             startActivity(intent);
         });
+
 
         Button btnRoomDB = findViewById(R.id.btn_room_db);
         btnRoomDB.setOnClickListener(view -> {

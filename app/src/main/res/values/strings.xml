@@ -5,4 +5,9 @@
     <string name="text_bottom_navigation">BottomNavigationActivity «이동</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="location_not_found">장소를 찾을 수 없습니다.</string>
+    <string name="please_check_spell_errors">맞춤법을 확인해 주세요!</string>
+    <string name="search_title">장소를 입력해주세요</string>
+    <string name="enter_location_hint">장소, 숙소, 맛집 검색</string>
 </resources>
