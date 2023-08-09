@@ -21,6 +21,7 @@ import com.bumptech.glide.request.target.Target;
 import com.example.example.api.RetrofitApiService;
 import com.example.example.model.example1.Post;
 import com.example.example.navigation.BottomNavigationActivity;
+import com.example.example.recyclerview.GitActivity;
 import com.example.example.retrofit.RetrofitApiManager;
 
 import java.util.List;

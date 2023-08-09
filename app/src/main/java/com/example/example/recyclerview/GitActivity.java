@@ -1,4 +1,4 @@
-package com.example.example;
+package com.example.example.recyclerview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.example.R;
 import com.example.example.api.GithubApiService;
 import com.example.example.databinding.ActivityGitBinding;
 import com.example.example.model.githubmodel.GithubResponse;

@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".GitActivity"
+            android:name=".recyclerview.GitActivity"
             android:exported="false" />
         <activity
             android:name=".RoomDatabaseActivity"
