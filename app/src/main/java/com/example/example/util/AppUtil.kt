@@ -1,10 +1,11 @@
-package com.example.example.util;
+package com.example.example.util
 
-import android.content.Context;
-import android.widget.Toast;
+import android.content.Context
+import android.widget.Toast
 
-public class AppUtil {
-    public static void showToast(Context context, String msg) {
-        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+object AppUtil {
+    @JvmStatic
+    fun showToast(context: Context?, msg: String?) {
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show()
     }
 }
