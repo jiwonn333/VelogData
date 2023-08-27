@@ -22,8 +22,6 @@ import com.example.example.api.GithubApiService;
 import com.example.example.databinding.ActivityGitBinding;
 import com.example.example.model.githubmodel.GithubResponse;
 import com.example.example.model.githubmodel.Repo;
-import com.example.example.recyclerview.GithubRepoAdapter;
-import com.example.example.recyclerview.ItemTouchHelperCallback;
 import com.example.example.retrofit.RetrofitApiManager;
 import com.example.example.util.AppUtil;
 
@@ -72,7 +70,7 @@ public class GitActivity extends AppCompatActivity {
         test();
 
 
-        mGithubApiService = RetrofitApiManager.GithubBuild().create(GithubApiService.class);
+        mGithubApiService = RetrofitApiManager.githubBuild().create(GithubApiService.class);
 
         // et 입력시
         etUsername.setOnEditorActionListener((textView, actionId, keyEvent) -> {

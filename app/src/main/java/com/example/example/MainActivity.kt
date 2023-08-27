@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         /**
          * Retrofit 객체 생성
          */
-        val retrofitApiService = RetrofitApiManager.Build().create(
+        val retrofitApiService = RetrofitApiManager.build().create(
             RetrofitApiService::class.java
         )
         retrofitApiService.getData("1").enqueue(object : Callback<List<Post>?> {
