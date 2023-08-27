@@ -8,6 +8,8 @@ plugins {
     id 'kotlin-kapt'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
 android {
     namespace 'com.example.example'
@@ -23,6 +25,8 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "TOKEN", properties["TOKEN"]
     }
 
     buildTypes {
@@ -81,7 +85,6 @@ dependencies {
     kapt 'com.jakewharton:butterknife-compiler:10.2.3'
 
 
-
     // Room
     //noinspection GradleDependency
     implementation "androidx.room:room-runtime:$room_version"
@@ -92,3 +95,4 @@ dependencies {
     // view modelscope
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
 }
+
