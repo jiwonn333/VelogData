@@ -1,11 +1,9 @@
-package com.example.example.recyclerview;
+package com.example.example.recyclerview
 
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView
 
-public interface ItemTouchHelperListener {
-    void onItemSwipe(int position);
-
-    void onLeftClick(int position, RecyclerView.ViewHolder viewHolder);
-
-    void onRightClick(int position, RecyclerView.ViewHolder viewHolder);
+interface ItemTouchHelperListener {
+    fun onItemSwipe(position: Int)
+    fun onLeftClick(position: Int, viewHolder: RecyclerView.ViewHolder?)
+    fun onRightClick(position: Int, viewHolder: RecyclerView.ViewHolder?)
 }

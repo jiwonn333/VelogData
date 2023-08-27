@@ -1,122 +1,39 @@
-package com.example.example.model.githubmodel;
+package com.example.example.model.githubmodel
 
-import com.google.gson.annotations.SerializedName;
+import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-import java.io.Serializable;
-
-public class Owner implements Serializable {
+class Owner : Serializable {
     @SerializedName("gists_url")
-    private String gistsUrl;
+    var gistsUrl: String? = null
 
     @SerializedName("repos_url")
-    private String reposUrl;
+    var reposUrl: String? = null
 
     @SerializedName("login")
-    private String login;
+    var login: String? = null
 
     @SerializedName("type")
-    private String type;
+    var type: String? = null
 
     @SerializedName("url")
-    private String url;
+    var url: String? = null
 
     @SerializedName("avatar_url")
-    private String avatarUrl;
+    var avatarUrl: String? = null
 
     @SerializedName("id")
-    private int id;
+    var id = 0
 
     @SerializedName("gravatar_id")
-    private String gravatarId;
+    var gravatarId: String? = null
 
     @SerializedName("node_id")
-    private String nodeId;
+    var nodeId: String? = null
 
     @SerializedName("organizations_url")
-    private String organizationsUrl;
-
-    public String getGistsUrl() {
-        return gistsUrl;
-    }
-
-    public void setGistsUrl(String gistsUrl) {
-        this.gistsUrl = gistsUrl;
-    }
-
-    public String getReposUrl() {
-        return reposUrl;
-    }
-
-    public void setReposUrl(String reposUrl) {
-        this.reposUrl = reposUrl;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getGravatarId() {
-        return gravatarId;
-    }
-
-    public void setGravatarId(String gravatarId) {
-        this.gravatarId = gravatarId;
-    }
-
-    public String getNodeId() {
-        return nodeId;
-    }
-
-    public void setNodeId(String nodeId) {
-        this.nodeId = nodeId;
-    }
-
-    public String getOrganizationsUrl() {
-        return organizationsUrl;
-    }
-
-    public void setOrganizationsUrl(String organizationsUrl) {
-        this.organizationsUrl = organizationsUrl;
-    }
-
-    @Override
-    public String toString() {
+    var organizationsUrl: String? = null
+    override fun toString(): String {
         return "Owner{" +
                 "gistsUrl='" + gistsUrl + '\'' +
                 ", reposUrl='" + reposUrl + '\'' +
@@ -128,6 +45,6 @@ public class Owner implements Serializable {
                 ", gravatarId='" + gravatarId + '\'' +
                 ", nodeId='" + nodeId + '\'' +
                 ", organizationsUrl='" + organizationsUrl + '\'' +
-                '}';
+                '}'
     }
 }
